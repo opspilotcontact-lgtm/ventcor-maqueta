@@ -1,0 +1,296 @@
+/* Ventcor v2 · «por encima del falso techo» (decisiones: ../../investigacion/POSICIONAMIENTO-CONTENIDO-ARTE-v2.md)
+   Un sistema: negro del uniforme, aluminio de la fibra y la chapa, verde del ventilador como acento,
+   lima del ribete como línea, y azul/rojo SOLO en los conductos dibujados (impulsión/retorno). */
+@font-face{font-family:'Unbounded';src:url('../fonts/unbounded-var-latin.woff2') format('woff2');font-weight:200 900;font-display:swap}
+@font-face{font-family:'Instrument Sans';src:url('../fonts/instrument-var-latin.woff2') format('woff2');font-weight:400 700;font-display:swap}
+
+:root{
+  /* una familia de grises, neutra-fría (la del aluminio) */
+  --negro:#1C1E1F; --negro-2:#25282A; --negro-3:#33373A; --estructura:#4A4F53;
+  --gris:#8E959A; --gris-osc:#5A6166; --linea:#CBD0D3;
+  --alu:#E3E6E8; --alu-2:#F1F3F4; --alu-osc:#AEB5BA; --blanco:#FFFFFF;
+  /* el logo */
+  --verde:#6CC04A; --verde-claro:#9BD77A; --verde-texto:#2C6F1C; --lima:#4FD83A;
+  --imp:#6FB0EA; --imp-osc:#2A6DB8; --ret:#EE6A78; --ret-osc:#C73545;
+  --display:'Unbounded',system-ui,sans-serif; --texto:'Instrument Sans',system-ui,sans-serif;
+  --curva:cubic-bezier(.22,.8,.26,1); --dur:.5s;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--alu-2);color:var(--negro);font:1.0625rem/1.6 var(--texto);-webkit-font-smoothing:antialiased}
+main{overflow-x:clip}
+img,svg{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);margin:0;letter-spacing:-.025em;line-height:1.04;font-weight:700}
+p{margin:0 0 1rem}
+.wrap{max-width:78rem;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+.ico{width:1.1em;height:1.1em;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--lima);outline-offset:3px}
+.medida{max-width:62ch}
+
+/* lo que falta por confirmar: visible y honesto */
+.pte{display:inline-block;font:600 .72rem/1.3 var(--texto);letter-spacing:.01em;padding:.15rem .45rem;border:1px dashed currentColor;border-radius:3px;vertical-align:middle;white-space:normal}
+
+.franja{background:var(--lima);color:var(--negro);font:600 .8rem/1.4 var(--texto);text-align:center;padding:.4rem 1rem}
+.franja a{font-weight:700}
+
+/* ---------- cabecera: el negro del uniforme con el ribete lima ---------- */
+.cab{position:sticky;top:0;z-index:40;background:var(--negro);color:var(--alu);box-shadow:inset 0 -3px 0 var(--lima)}
+.cab .wrap{display:flex;align-items:center;gap:1.25rem;min-height:4.25rem}
+.marca{display:flex;align-items:center;text-decoration:none;flex:none}
+.marca img{width:auto;height:2.5rem}
+.nav{display:flex;gap:1.5rem;margin-left:auto;font:600 .95rem var(--texto)}
+.nav a{text-decoration:none;opacity:.85;padding:.3rem 0;border-bottom:2px solid transparent}
+.nav a:hover{opacity:1}
+.nav a[aria-current=page]{opacity:1;border-bottom-color:var(--verde)}
+.menu-btn{display:none;margin-left:auto;background:none;border:1.5px solid #ffffff40;color:var(--alu);font:700 .85rem var(--display);padding:.6rem .8rem;border-radius:4px;cursor:pointer}
+@media (max-width:980px){
+  .menu-btn{display:inline-flex}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--negro);flex-direction:column;gap:0;padding:.5rem clamp(1rem,4vw,2.5rem) 1.25rem;box-shadow:inset 0 -3px 0 var(--lima)}
+  .nav.abierto{display:flex}
+  .nav a{padding:.85rem 0;border-bottom:1px solid #ffffff1a;font-size:1.05rem}
+  .cab .btn{display:none}
+}
+
+/* ---------- botones: rectos, en caja normal ---------- */
+.btn{font:700 .95rem/1.1 var(--display);letter-spacing:-.01em;border:0;border-radius:4px;padding:1rem 1.2rem;cursor:pointer;display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;transition:background var(--dur) var(--curva),box-shadow var(--dur) var(--curva)}
+.btn .ico{width:1.05em;height:1.05em}
+.btn-pri{background:var(--verde);color:var(--negro)}
+.btn-pri:hover{background:var(--verde-claro)}
+.btn-sec{background:transparent;color:var(--alu);box-shadow:inset 0 0 0 1.5px #ffffff59}
+.btn-sec:hover{box-shadow:inset 0 0 0 1.5px var(--alu)}
+.btn-osc{background:var(--negro);color:var(--alu)}
+.btn-osc:hover{background:var(--negro-3)}
+.btn-lin{background:transparent;color:var(--negro);box-shadow:inset 0 0 0 1.5px var(--negro)}
+.btn-lin:hover{background:#0000000d}
+.btn-peq{padding:.7rem .9rem;font-size:.82rem}
+.btn[disabled],.btn[aria-disabled=true]{opacity:.5;cursor:not-allowed}
+.btns{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
+
+/* ---------- campos ---------- */
+.campo-negro{background:var(--negro);color:var(--alu)}
+.campo-alu{background:var(--alu)}
+.campo-claro{background:var(--alu-2)}
+.sec{padding:clamp(3.5rem,8vw,6.5rem) 0}
+.sec-cab{margin-bottom:clamp(2rem,4vw,3rem)}
+.sec-cab h2{font-size:clamp(1.9rem,4.4vw,3.1rem);max-width:20ch}
+.sec-cab p{margin-top:1rem;font-size:1.13rem;max-width:58ch;color:var(--gris-osc)}
+.campo-negro .sec-cab p{color:var(--alu-osc)}
+.flecha-txt{display:inline-flex;align-items:center;gap:.45rem;font:700 .95rem var(--display);text-decoration:none;border-bottom:2px solid var(--verde);padding-bottom:.2rem}
+.flecha-txt:hover{border-bottom-color:currentColor}
+
+/* ---------- PORTADA: el corte del edificio ---------- */
+.portada{position:relative;padding:clamp(2.25rem,5vw,4rem) 0 clamp(2rem,4vw,3rem)}
+.portada .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:center}
+.portada h1{font-size:clamp(2.1rem,4.3vw,3.55rem);color:var(--blanco)}
+.portada h1 .seg{display:block;color:var(--alu-osc);font-weight:500;margin-top:.35em;font-size:.56em;letter-spacing:-.015em;line-height:1.2}
+.portada .sub{margin:1.5rem 0 1.75rem;font-size:1.15rem;color:var(--alu);max-width:40ch}
+.donde{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;margin-top:1.6rem;font-size:.95rem;color:var(--alu-osc)}
+.donde span{display:inline-flex;align-items:center;gap:.45rem}
+.donde .ico{color:var(--verde)}
+.corte{position:relative}
+.corte svg{width:100%;height:auto}
+@media (max-width:860px){.portada .wrap{grid-template-columns:1fr}.corte{margin:0 -.5rem}}
+
+/* el dibujo del corte */
+.c-estr{stroke:var(--estructura);fill:none;stroke-width:2}
+.c-losa{fill:var(--negro-3)}
+.c-terreno{fill:url(#rayado)}
+.c-ft{stroke:var(--gris-osc);stroke-width:1.5;stroke-dasharray:6 6;fill:none}
+.c-imp{stroke:var(--imp)}
+.c-ret{stroke:var(--ret)}
+.c-ext{stroke:var(--alu-osc)}
+.c-hueco{stroke:var(--negro)}
+.c-boca{fill:none;stroke-width:2;stroke-linejoin:round}
+.c-coche{fill:none;stroke:var(--gris-osc);stroke-width:2;stroke-linejoin:round}
+.c-carcasa{fill:none;stroke:var(--gris-osc);stroke-width:1.5}
+.punto-imp{fill:#BFE0FA}.punto-ret{fill:#FFC2C8}.punto-ext{fill:var(--alu)}
+
+/* el montaje planta a planta, de arriba abajo (solo opacity/transform) */
+.monta{opacity:0;transform:translateY(-8px);animation:monta .6s var(--curva) forwards}
+.monta.n1{animation-delay:.05s}.monta.n2{animation-delay:.25s}.monta.n3{animation-delay:.45s}.monta.n4{animation-delay:.65s}.monta.n5{animation-delay:.85s}.monta.n6{animation-delay:1.05s}
+@keyframes monta{to{opacity:1;transform:none}}
+.rotor{transform-box:fill-box;transform-origin:center;animation:gira 2.4s linear infinite}
+.rotor.lento{animation-duration:4.5s}
+@keyframes gira{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.monta{opacity:1;transform:none;animation:none}.rotor{animation:none}}
+
+/* el cajetín: el único sitio con versales, porque es el objeto del oficio */
+.cajetin{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1.5px solid var(--estructura);margin-top:.75rem;font-size:.9rem}
+.cajetin div{padding:.55rem .7rem;border-right:1px solid var(--estructura);border-bottom:1px solid var(--estructura);min-width:0}
+.cajetin div:nth-child(3n){border-right:0}
+.cajetin div:nth-last-child(-n+3){border-bottom:0}
+.cajetin dt{font:600 .62rem/1.2 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--gris)}
+.cajetin dd{margin:.25rem 0 0;color:var(--blanco);font-weight:600;line-height:1.3}
+.leyenda{display:flex;flex-wrap:wrap;gap:.3rem .9rem;font-size:.82rem;color:var(--alu-osc);margin-top:.6rem}
+.leyenda i{display:inline-block;width:1.4rem;height:.38rem;margin-right:.35rem;vertical-align:middle;border-radius:1px}
+.leyenda .ft{height:0;border-top:2px dashed var(--gris-osc)}
+@media (max-width:560px){.cajetin{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cajetin div:nth-child(3n){border-right:1px solid var(--estructura)}.cajetin div:nth-child(2n){border-right:0}
+  .cajetin div:nth-last-child(-n+3){border-bottom:1px solid var(--estructura)}.cajetin div:nth-last-child(-n+2){border-bottom:0}}
+
+/* ---------- QUÉ MONTAMOS: el edificio por plantas ---------- */
+.edificio{border-top:10px solid var(--negro)}
+.planta{display:grid;grid-template-columns:9.5rem minmax(0,1fr);border-bottom:10px solid var(--negro);background:var(--alu-2)}
+.planta.cubierta{background:var(--alu)}
+.planta.sotano{background:var(--negro);color:var(--alu);border-bottom:0}
+.nivel{padding:1.4rem 1rem 1.4rem 0;border-right:1.5px dashed var(--alu-osc);font:700 .9rem/1.2 var(--display);color:var(--gris-osc)}
+.sotano .nivel{color:var(--alu-osc);border-right-color:var(--estructura)}
+.nivel small{display:block;font:500 .82rem/1.35 var(--texto);margin-top:.35rem;letter-spacing:0}
+.planta-cont{padding:clamp(1.5rem,3vw,2.25rem) 0 clamp(1.5rem,3vw,2.25rem) clamp(1rem,3vw,2.5rem);min-width:0}
+.planta h3{font-size:clamp(1.25rem,2.4vw,1.7rem);margin-bottom:.6rem}
+.planta p{max-width:60ch}
+.sotano p{color:var(--alu)}
+.tramos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:0;margin-top:1rem;border-top:1.5px solid var(--linea)}
+.tramo{padding:1.1rem 1.25rem 1.1rem 0;border-bottom:1.5px solid var(--linea)}
+.tramo svg{height:4.2rem;width:auto;margin-bottom:.6rem;color:var(--negro)}
+.tramo h4{font:700 1rem/1.25 var(--display);margin:0 0 .35rem}
+.tramo p{font-size:.97rem;margin:0;color:var(--gris-osc)}
+.uta-fila{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1rem,3vw,2.5rem);align-items:center}
+.uta-fila svg{max-height:12rem;width:100%;color:var(--negro)}
+.sotano-fila{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(1rem,3vw,2.5rem);align-items:center}
+.sotano-fila svg{width:100%}
+.mas{display:inline-block;margin-top:.5rem;font:700 .75rem var(--display);color:var(--negro);background:var(--verde);padding:.3rem .5rem;border-radius:2px}
+@media (max-width:760px){.planta{grid-template-columns:1fr}.nivel{border-right:0;border-bottom:1.5px dashed var(--alu-osc);padding:1rem 0 .75rem}.planta-cont{padding-left:0}.uta-fila,.sotano-fila{grid-template-columns:1fr}}
+
+.no-hacemos{margin-top:2rem;padding:1.25rem 1.4rem;border:1.5px solid var(--negro);background:var(--alu-2);display:grid;grid-template-columns:auto minmax(0,1fr);gap:.4rem 1rem;align-items:start}
+.no-hacemos b{font:700 .95rem var(--display)}
+.no-hacemos ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:.3rem 1.4rem}
+.no-hacemos li::before{content:'—';margin-right:.4rem;color:var(--ret-osc)}
+@media (max-width:560px){.no-hacemos{grid-template-columns:1fr}}
+
+/* ---------- CÓMO ENTRAMOS: la barra de la obra ---------- */
+.obra-barra{margin-top:1rem}
+.fases{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border:1.5px solid var(--negro)}
+.fase{padding:.8rem .6rem;border-right:1px solid var(--negro);font:600 .82rem/1.25 var(--texto);min-height:4.2rem;background:var(--alu-2)}
+.fase:last-child{border-right:0}
+.fase span{display:block;font:700 .66rem var(--display);color:var(--gris-osc);margin-bottom:.3rem}
+.fase.nuestra{background:var(--negro);color:var(--alu)}
+.fase.nuestra span{color:var(--verde)}
+.entradas{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1rem,3vw,2.5rem);margin-top:2rem}
+.entrada{border-top:6px solid var(--verde);padding-top:1.1rem}
+.entrada.b{border-top-color:var(--ret)}
+.entrada h3{font-size:clamp(1.25rem,2.3vw,1.6rem);margin-bottom:.6rem}
+.entrada .marca-ent{font:700 .78rem var(--display);display:inline-block;padding:.25rem .5rem;margin-bottom:.8rem;background:var(--verde);color:var(--negro)}
+.entrada.b .marca-ent{background:var(--ret);color:var(--negro)}
+@media (max-width:760px){.fases{grid-template-columns:repeat(3,minmax(0,1fr))}.fase:nth-child(3){border-right:0}.fase:nth-child(-n+3){border-bottom:1px solid var(--negro)}.entradas{grid-template-columns:1fr}}
+
+/* ---------- OBRAS: el parte de obra ---------- */
+.partes{display:grid;gap:0;border-top:2px solid var(--negro)}
+.parte{display:grid;grid-template-columns:7.5rem minmax(0,1.3fr) minmax(0,1fr) 9rem;gap:1.25rem;padding:1.4rem 0;border-bottom:1.5px solid var(--negro);align-items:start}
+.parte .mini{width:7rem;height:auto}
+.parte h3{font-size:clamp(1.15rem,2vw,1.45rem);margin-bottom:.3rem}
+.parte .lugar{font-weight:600;color:var(--gris-osc);margin:0}
+.parte .que{margin:0;font-size:.98rem}
+.estado{font:700 .72rem/1.2 var(--display);padding:.35rem .5rem;border:1.5px solid currentColor;justify-self:start;text-align:center}
+.estado.curso{background:var(--verde);border-color:var(--verde);color:var(--negro)}
+@media (max-width:860px){.parte{grid-template-columns:5.5rem minmax(0,1fr)}.parte .mini{width:5rem}.parte .que,.parte .estado{grid-column:2}}
+
+/* ficha grande (página de obras) */
+.ficha{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);border:2px solid var(--negro);background:var(--blanco);margin-bottom:2rem}
+.ficha-texto{padding:clamp(1.25rem,3vw,2rem)}
+.ficha h2{font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:.5rem}
+.ficha .cajetin{border-color:var(--negro);margin:1.25rem 0}
+.ficha .cajetin div{border-color:var(--negro)}
+.ficha .cajetin dd{color:var(--negro)}
+.ficha .cajetin dt{color:var(--gris-osc)}
+.ficha-foto{position:relative;background:var(--negro);min-height:16rem;display:flex}
+.ficha-foto img{width:100%;height:100%;object-fit:cover}
+.ficha-foto figcaption{position:absolute;left:0;bottom:0;right:0;padding:.5rem .75rem;font-size:.75rem;background:#1c1e1fcc;color:var(--alu)}
+.hueco-foto{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;color:var(--alu-osc);padding:2rem;text-align:center;font-size:.92rem;background:repeating-linear-gradient(135deg,var(--negro) 0 14px,var(--negro-2) 14px 28px)}
+.hueco-foto svg{width:4.5rem;color:var(--estructura)}
+@media (max-width:860px){.ficha{grid-template-columns:1fr}.ficha-foto{order:-1}}
+
+/* ---------- DOCUMENTACIÓN: la carpeta ---------- */
+.carpeta{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:start}
+.papeles{list-style:none;margin:0;padding:0;border:2px solid var(--negro);background:var(--blanco)}
+.papeles li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1rem;padding:.85rem 1rem;border-bottom:1px solid var(--linea);align-items:center}
+.papeles li:last-child{border-bottom:0}
+.papeles b{display:block;font-weight:700}
+.papeles small{color:var(--gris-osc)}
+.sello{font:700 .68rem var(--display);padding:.3rem .45rem;border:1.5px solid var(--verde-texto);color:var(--verde-texto);white-space:nowrap}
+.sello.pend{border-style:dashed;border-color:var(--gris);color:var(--gris-osc)}
+@media (max-width:760px){.carpeta{grid-template-columns:1fr}}
+
+/* ---------- EMPLEO ---------- */
+.empleo{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:center}
+.empleo h2{font-size:clamp(2rem,5vw,3.6rem);color:var(--blanco)}
+.empleo h2 em{font-style:normal;color:var(--verde)}
+.foto-obra{margin:0;position:relative}
+.foto-obra img{width:100%;height:auto;border:1.5px solid var(--estructura)}
+.foto-obra figcaption{font-size:.8rem;color:var(--alu-osc);margin-top:.6rem}
+.lista-sec{list-style:none;padding:0;margin:1.25rem 0 1.75rem;display:grid;gap:.6rem}
+.lista-sec li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.7rem;align-items:start}
+.lista-sec .ico{color:var(--verde);margin-top:.25rem}
+@media (max-width:860px){.empleo{grid-template-columns:1fr}.foto-obra{max-width:24rem}}
+
+/* tablas de dos columnas (empleo: qué buscamos / qué damos) */
+.dos{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;border:2px solid var(--negro);background:var(--blanco)}
+.dos > div{padding:clamp(1.25rem,3vw,2rem)}
+.dos > div + div{border-left:2px solid var(--negro)}
+.dos h3{font-size:1.3rem;margin-bottom:.9rem}
+.dos ul{margin:0;padding:0;list-style:none;display:grid;gap:.55rem}
+.dos li{padding-left:1.1rem;position:relative}
+.dos li::before{content:'';position:absolute;left:0;top:.62em;width:.5rem;height:3px;background:var(--verde)}
+@media (max-width:760px){.dos{grid-template-columns:1fr}.dos > div + div{border-left:0;border-top:2px solid var(--negro)}}
+
+/* ---------- FORMULARIOS que componen el mensaje ---------- */
+.hoja{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:clamp(1.5rem,4vw,3rem);align-items:start}
+.form{display:grid;gap:1.15rem}
+.form fieldset{border:0;padding:0;margin:0;min-width:0}
+.form legend,.form label.et{font:700 .92rem var(--display);margin-bottom:.5rem;display:block;padding:0}
+.form input[type=text],.form input[type=email],.form input[type=tel],.form input[type=month],.form textarea,.form select{width:100%;font:inherit;padding:.8rem .9rem;border:1.5px solid var(--negro);border-radius:3px;background:var(--blanco);color:var(--negro)}
+.form textarea{min-height:6rem;resize:vertical}
+.opciones{display:flex;flex-wrap:wrap;gap:.5rem}
+.opcion{position:relative}
+.opcion input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.opcion span{display:inline-block;padding:.6rem .8rem;border:1.5px solid var(--negro);border-radius:3px;font-weight:600;font-size:.95rem;background:var(--blanco);cursor:pointer;transition:background .2s,color .2s}
+.opcion input:checked + span{background:var(--negro);color:var(--alu);box-shadow:inset 0 -4px 0 var(--verde)}
+.opcion input:focus-visible + span{outline:3px solid var(--lima);outline-offset:2px}
+.mensaje{position:sticky;top:6rem;background:var(--negro);color:var(--alu);padding:1.25rem;border-top:6px solid var(--verde)}
+.mensaje h3{font-size:1.05rem;margin-bottom:.8rem;color:var(--blanco)}
+.mensaje pre{white-space:pre-wrap;font:500 .95rem/1.5 var(--texto);margin:0 0 1rem;padding:1rem;background:var(--negro-2);border-left:3px solid var(--estructura);min-height:9rem}
+.mensaje .aviso{font-size:.82rem;color:var(--alu-osc);margin-top:.75rem}
+@media (max-width:860px){.hoja{grid-template-columns:1fr}.mensaje{position:static}}
+
+/* ---------- PÁGINAS interiores: cabecera corta ---------- */
+.cab-pag{padding:clamp(2.5rem,6vw,4.5rem) 0 clamp(2rem,4vw,3rem)}
+.cab-pag .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(1.5rem,4vw,3rem);align-items:end}
+.cab-pag h1{font-size:clamp(2.1rem,5vw,3.8rem);color:var(--blanco)}
+.cab-pag p{font-size:1.12rem;color:var(--alu);margin:1.2rem 0 0;max-width:46ch}
+.cab-pag .dib{color:var(--alu-osc)}
+@media (max-width:860px){.cab-pag .wrap{grid-template-columns:1fr}}
+.miga{font-size:.85rem;color:var(--alu-osc);margin-bottom:1rem}
+.miga a{color:var(--alu)}
+
+/* garaje: el plano */
+.plano-garaje{background:var(--negro);border:1.5px solid var(--estructura);padding:.75rem}
+.pasos-garaje{counter-reset:p;list-style:none;margin:0;padding:0;border-top:2px solid var(--negro)}
+.pasos-garaje li{counter-increment:p;display:grid;grid-template-columns:3.2rem minmax(0,1fr);gap:1rem;padding:1.1rem 0;border-bottom:1.5px solid var(--linea)}
+.pasos-garaje li::before{content:counter(p,decimal-leading-zero);font:700 1.25rem var(--display);color:var(--verde-texto)}
+.pasos-garaje b{display:block;font:700 1.02rem var(--display);margin-bottom:.25rem}
+.pasos-garaje p{margin:0;color:var(--gris-osc)}
+.norma{font-size:.92rem;color:var(--gris-osc);border-left:3px solid var(--verde);padding-left:1rem;margin-top:1.5rem;max-width:62ch}
+
+/* ---------- PIE: el sótano ---------- */
+.pie{background:var(--negro);color:var(--alu-osc);padding:3rem 0 2rem;border-top:3px solid var(--lima);font-size:.95rem}
+.pie .wrap{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(3,minmax(0,1fr));gap:2rem}
+.pie h2{font:700 .9rem var(--display);color:var(--alu);margin:0 0 .8rem}
+.pie ul{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
+.pie a{text-decoration:none}.pie a:hover{color:var(--alu);text-decoration:underline}
+.pie .legal{grid-column:1/-1;border-top:1px solid var(--estructura);padding-top:1.25rem;font-size:.82rem;display:flex;flex-wrap:wrap;gap:.5rem 1.5rem}
+@media (max-width:860px){.pie .wrap{grid-template-columns:1fr 1fr}.pie .wrap > div:first-child{grid-column:1/-1}}
+
+/* entradas al hacer scroll (sin JS o con movimiento reducido: todo visible) */
+.js .revela{opacity:0;transform:translateY(14px);transition:opacity .7s var(--curva),transform .7s var(--curva)}
+.js .revela.visto{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .revela{opacity:1;transform:none;transition:none}}
+.campo-claro .foto-obra figcaption,.campo-alu .foto-obra figcaption{color:var(--gris-osc)}
+.planta{padding:0 clamp(.75rem,2vw,1.5rem)}
+.foto-obra img{aspect-ratio:4/5;object-fit:cover;object-position:center 35%;max-height:34rem}
+.empleo .foto-obra{max-width:27rem;justify-self:end}
+@media (max-width:860px){.empleo .foto-obra{justify-self:start}}
+.hueco-foto svg.ico{width:3rem;height:3rem;stroke-width:1.5}
+.hueco-foto .pte{color:var(--alu)}
